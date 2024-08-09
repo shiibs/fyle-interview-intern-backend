@@ -8,8 +8,8 @@ if [ "$1" = 'test' ]; then
   rm -f core/store.sqlite3
   flask db upgrade -d core/migrations/
 
-  # Run tests with coverage
-  pytest --cov=core --cov-report=html -vvv -s tests/
+  # Run tests with coverage, excluding specific files
+  pytest --cov=core --cov-report=html --cov-fail-under=94 --cov-config=.coveragerc -vvv -s tests/
 
 elif [ "$1" = 'start' ]; then
   # Start the server

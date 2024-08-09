@@ -42,6 +42,6 @@ docker-compose run test
 
 ### File Descriptions
 
-1.  Dockerfile: Defines the environment for the Flask application, including dependencies and entrypoint script.
-2.  docker-compose.yml: Defines the services, including the application, test, and database services, and their configurations.
-3.  entrypoint.sh: A script that determines whether to run tests or start the server based on the argument provided.
+1. Dockerfile: Defines the environment for the Flask application, including dependencies and entrypoint script.
+2. docker-compose.yml: Defines the services, including the application, test, and database services, and their configurations.
+3. entrypoint.sh: A script that determines whether to run tests or start the server based on the argument provided.
