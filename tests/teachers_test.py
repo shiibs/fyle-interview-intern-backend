@@ -1,3 +1,6 @@
+from core.models.assignments import AssignmentStateEnum, GradeEnum
+import pytest
+
 def test_get_assignments_teacher_1(client, h_teacher_1):
     response = client.get(
         '/teacher/assignments',
@@ -42,6 +45,7 @@ def test_grade_assignment_cross(client, h_teacher_2):
     data = response.json
 
     assert data['error'] == 'FyleError'
+
 
 
 def test_grade_assignment_bad_grade(client, h_teacher_1):
@@ -90,7 +94,7 @@ def test_grade_assignment_draft_assignment(client, h_teacher_1):
         '/teacher/assignments/grade',
         headers=h_teacher_1
         , json={
-            "id": 2,
+            "id": 6,
             "grade": "A"
         }
     )
@@ -99,3 +103,20 @@ def test_grade_assignment_draft_assignment(client, h_teacher_1):
     data = response.json
 
     assert data['error'] == 'FyleError'
+
+@pytest.mark.run(order=1)
+def test_grade_assignment_by_teacher(client, h_teacher_2):
+    response = client.post(
+        '/teacher/assignments/grade',
+        json={
+           "id": 4,
+            "grade": GradeEnum.C.value
+        },
+        headers=h_teacher_2
+    )
+
+    assert response.status_code == 200
+
+    assert response.json['data']['state'] == AssignmentStateEnum.GRADED.value
+    assert response.json['data']['grade'] == GradeEnum.C
+

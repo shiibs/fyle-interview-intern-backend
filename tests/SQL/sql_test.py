@@ -78,6 +78,8 @@ def test_get_assignments_in_graded_state_for_each_student():
         assert result[0] == sql_result[itr][0]
 
 
+
+
 def test_get_grade_A_assignments_for_teacher_with_max_grading():
     """Test to get count of grade A assignments for teacher which has graded maximum assignments"""
 
@@ -98,3 +100,4 @@ def test_get_grade_A_assignments_for_teacher_with_max_grading():
     # Execute the SQL query again and check if the count matches the newly created assignments
     sql_result = db.session.execute(text(sql)).fetchall()
     assert grade_a_count_2 == sql_result[0][0]
+

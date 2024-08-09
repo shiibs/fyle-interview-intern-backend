@@ -1,0 +1,24 @@
+version: "3.8"
+
+services:
+  app:
+    build: .
+    ports:
+      - "7755:7755"
+    command: ["start"]
+    volumes:
+      - .:/app
+
+  test:
+    build: .
+    command: ["test"]
+    volumes:
+      - .:/app
+
+  db:
+    image: nouchka/sqlite3:latest
+    volumes:
+      - db-data:/path/to/db
+
+volumes:
+  db-data:
